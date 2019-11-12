@@ -105,7 +105,7 @@ public class MvcController {
         return "success";
     }
 
-    @GetMapping
+    @GetMapping("/register")
     public String register() {
         return "register";
     }
