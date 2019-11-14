@@ -15,4 +15,13 @@ public class ProductDTO {
 
     public ProductDTO() {
     }
+
+    public ProductDTO(Integer productId, String name, Integer quantity, Double price, Date productionDate, Date expireDate) {
+        this.productId = productId;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.productionDate = productionDate;
+        this.expireDate = expireDate;
+    }
 }

@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import utils.ProductUtils;
+import utils.Utils;
 
 import java.util.*;
 
@@ -30,9 +30,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        userList = Arrays.asList(ProductUtils.getUserOne(),
-                ProductUtils.getUserTwo(),
-                ProductUtils.getUserThree());
+        userList = Utils.getUserList();
     }
 
     @Test
