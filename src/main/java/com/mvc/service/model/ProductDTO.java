@@ -1,4 +1,4 @@
-package com.mvc.service.entity;
+package com.mvc.service.model;
 
 import lombok.Data;
 

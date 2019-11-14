@@ -13,7 +13,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class MvcService {
+public class UserService {
 
     private final UserRepository userRepository;
 
@@ -35,11 +35,11 @@ public class MvcService {
         return false;
     }
 
-    public User save(User user) {
+    public Optional<User> save(User user) {
         if (userNameExists(user.getUserName())) {
             log.error("The user with name " + user.getUserName() + " already exists. Try again");
             ResponseEntity.badRequest().build();
         }
-        return userRepository.save(user);
+        return Optional.of(userRepository.save(user));
     }
 }
