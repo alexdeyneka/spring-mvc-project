@@ -24,8 +24,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
@@ -69,5 +68,6 @@ public class ProductServiceTest {
                 .thenReturn(expectedProduct);
         productService.postForObject(expectedProduct);
         verify(restTemplate, times(1)).postForObject(anyString(), any(HttpEntity.class), any(Class.class));
+        verifyNoMoreInteractions(restTemplate);
     }
 }
