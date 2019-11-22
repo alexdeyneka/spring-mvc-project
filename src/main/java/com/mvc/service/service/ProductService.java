@@ -3,6 +3,7 @@ package com.mvc.service.service;
 import com.mvc.service.model.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ import java.util.Date;
 @Service
 public class ProductService {
 
+    @Value("${port}")
+    private String port;
+
     private RestTemplate restTemplate = new RestTemplate();
 
     public Date parseDate(String date) throws ParseException {
@@ -24,11 +28,10 @@ public class ProductService {
     }
 
     public ResponseEntity<String> getForEntity() {
-        return restTemplate.getForEntity("http://localhost:8080/product", String.class);
+        return restTemplate.getForEntity(port + "/product", String.class);
     }
 
     public void postForObject(ProductDTO productDTO) {
-        restTemplate.postForObject("http://localhost:8080/product/create", new HttpEntity<>(productDTO), ProductDTO.class);
+        restTemplate.postForObject(port + "/product/create", new HttpEntity<>(productDTO), ProductDTO.class);
     }
-
 }

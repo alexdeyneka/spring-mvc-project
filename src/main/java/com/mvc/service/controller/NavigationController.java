@@ -17,6 +17,7 @@ import java.util.Optional;
 public class NavigationController {
 
     private final UserService userService;
+    private static final String ERROR = "error";
 
     @GetMapping("/home")
     public String homePage() {
@@ -35,7 +36,7 @@ public class NavigationController {
         user.setPassword(password);
         Optional<User> optionalUser = userService.save(user);
         if (!optionalUser.isPresent()) {
-            return "error";
+            return ERROR;
         }
         model.addAttribute("info", "User was registered successfully");
         return "success";
@@ -52,7 +53,7 @@ public class NavigationController {
         List<User> list = userService.findAll();
         if (list.isEmpty()) {
             model.addAttribute("info", "Access DENIED: invalid credentials");
-            return "error";
+            return ERROR;
         }
         for (User user : list) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
@@ -63,7 +64,7 @@ public class NavigationController {
                 model.addAttribute("info", "Access DENIED: invalid credentials");
                 model.addAttribute("userName", userName);
                 model.addAttribute("password", password);
-                result = "error";
+                result = ERROR;
             }
         }
         return result;
