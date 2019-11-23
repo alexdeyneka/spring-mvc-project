@@ -59,7 +59,7 @@ public class NavigationController {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
                 model.addAttribute("userName", userName);
                 model.addAttribute("password", password);
-                result = "welcome";
+                return "welcome";
             } else {
                 model.addAttribute("info", "Access DENIED: invalid credentials");
                 model.addAttribute("userName", userName);

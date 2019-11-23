@@ -15,10 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -65,14 +64,15 @@ public class ProductControllerTest {
 
     @Test
     public void testAddProduct() throws Exception {
-        ResponseEntity<String> response = new ResponseEntity<>(productDTOList.toString(), HttpStatus.OK);
-//        doNothing().when(productService.postForObject(any(ProductDTO.class)));
-        this.mockMvc.perform(post("/addProduct"))
+        Date mockDate = new Date();
+        given(productService.parseDate(anyString())).willReturn(mockDate);
+        this.mockMvc.perform(post("/addProduct?id=5&name=oops&quantity=5&price=15&productionDate=null&expirationDate=null"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("success"))
                 .andExpect(forwardedUrl("/WEB-INF/views/success.jsp"))
                 .andExpect(model().attribute("info", "Product was added successfully"));
         verify(productService, times(1)).postForObject(any(ProductDTO.class));
+        verify(productService, times(2)).parseDate(anyString());
         verifyNoMoreInteractions(productService);
     }
 }
