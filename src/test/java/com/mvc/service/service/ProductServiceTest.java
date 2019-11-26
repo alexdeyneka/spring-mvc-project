@@ -15,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import utils.Utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -44,19 +41,11 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void parseDate() throws ParseException {
-        String date = "2019-25-05";
-        Date originDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        String actual = originDate.toString();
-        assertEquals("Tue Jan 05 00:00:00 EET 2021", actual);
-    }
-
-    @Test
     public void getForEntity() {
         String expected = "Some body";
         Mockito.when(restTemplate.getForEntity(anyString(), any(Class.class)))
                 .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
-        ResponseEntity<String> actual = productService.getForEntity();
+        ResponseEntity<String> actual = productService.getProductList();
         assertEquals(expected, actual.getBody());
         assertEquals(HttpStatus.OK, actual.getStatusCode());
     }
@@ -66,7 +55,7 @@ public class ProductServiceTest {
         ProductDTO expectedProduct = productList.get(0);
         Mockito.when(restTemplate.postForObject(anyString(), any(HttpEntity.class), any(Class.class)))
                 .thenReturn(expectedProduct);
-        productService.postForObject(expectedProduct);
+        productService.addOrUpdateProduct(expectedProduct);
         verify(restTemplate, times(1)).postForObject(anyString(), any(HttpEntity.class), any(Class.class));
         verifyNoMoreInteractions(restTemplate);
     }

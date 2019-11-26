@@ -1,10 +1,14 @@
 package com.mvc.service.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
     private Integer productId;
     private String name;
@@ -12,16 +16,4 @@ public class ProductDTO {
     private Double price;
     private Date productionDate;
     private Date expireDate;
-
-    public ProductDTO() {
-    }
-
-    public ProductDTO(Integer productId, String name, Integer quantity, Double price, Date productionDate, Date expireDate) {
-        this.productId = productId;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.productionDate = productionDate;
-        this.expireDate = expireDate;
-    }
 }

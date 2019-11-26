@@ -9,29 +9,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class ProductService {
 
-    @Value("${port}")
-    private String port;
+    @Value("${productUrl}")
+    private String productUrl;
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public Date parseDate(String date) throws ParseException {
-        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+    public ResponseEntity<String> getProductList() {
+        return restTemplate.getForEntity(productUrl + "/product", String.class);
     }
 
-    public ResponseEntity<String> getForEntity() {
-        return restTemplate.getForEntity(port + "/product", String.class);
-    }
-
-    public void postForObject(ProductDTO productDTO) {
-        restTemplate.postForObject(port + "/product/create", new HttpEntity<>(productDTO), ProductDTO.class);
+    public void addOrUpdateProduct(ProductDTO productDTO) {
+        restTemplate.postForObject(productUrl + "/product/create", new HttpEntity<>(productDTO), ProductDTO.class);
     }
 }

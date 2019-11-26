@@ -5,9 +5,9 @@
 		 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>web-thymeleaf</artifactId>
-    <name>Spring Boot Web Thymeleaf Example</name>
-    <description>Spring Boot Web Thymeleaf Example</description>
+    <artifactId>spring-mvc-service</artifactId>
+    <name>Spring MVC Service</name>
+    <description>Spring MVC Service</description>
     <version>1.0</version>
 
     <packaging>jar</packaging>

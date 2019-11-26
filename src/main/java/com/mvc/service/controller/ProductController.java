@@ -2,6 +2,7 @@ package com.mvc.service.controller;
 
 import com.mvc.service.model.ProductDTO;
 import com.mvc.service.service.ProductService;
+import com.mvc.service.utils.ProductUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductUtils productUtils;
+
     @GetMapping("/all")
     public String getAll(Model model) {
-        ResponseEntity<String> response = productService.getForEntity();
+        ResponseEntity<String> response = productService.getProductList();
         model.addAttribute("response", response.getBody());
         return "productList";
     }
@@ -40,8 +44,8 @@ public class ProductController {
                              @RequestParam(value = "productionDate") String productionDate,
                              @RequestParam(value = "expirationDate") String expirationDate,
                              Model model) throws ParseException {
-        ProductDTO productDTO = new ProductDTO(id, name, quantity, price, productService.parseDate(productionDate), productService.parseDate(expirationDate));
-        productService.postForObject(productDTO);
+        ProductDTO productDTO = new ProductDTO(id, name, quantity, price, productUtils.parseDate(productionDate), productUtils.parseDate(expirationDate));
+        productService.addOrUpdateProduct(productDTO);
         model.addAttribute("info", "Product was added successfully");
         return "success";
     }

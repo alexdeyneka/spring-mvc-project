@@ -1,10 +1,14 @@
 package com.mvc.service.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -13,13 +17,4 @@ public class User {
     private long id;
     private String userName;
     private String password;
-
-    public User() {
-    }
-
-    public User(long id, String userName, String password) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-    }
 }
