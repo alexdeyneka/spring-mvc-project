@@ -14,16 +14,16 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ProductService {
 
-    @Value("${productUrl}")
-    private String productUrl;
+    @Value("${applicationUrl}")
+    private String applicationUrl;
 
     private RestTemplate restTemplate = new RestTemplate();
 
     public ResponseEntity<String> getProductList() {
-        return restTemplate.getForEntity(productUrl + "/product", String.class);
+        return restTemplate.getForEntity(applicationUrl + "/product", String.class);
     }
 
     public void addOrUpdateProduct(ProductDTO productDTO) {
-        restTemplate.postForObject(productUrl + "/product/create", new HttpEntity<>(productDTO), ProductDTO.class);
+        restTemplate.postForObject(applicationUrl + "/product/create", new HttpEntity<>(productDTO), ProductDTO.class);
     }
 }
