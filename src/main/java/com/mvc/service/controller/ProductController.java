@@ -5,6 +5,7 @@ import com.mvc.service.service.ProductService;
 import com.mvc.service.utils.ProductUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import java.text.ParseException;
 
 @RequiredArgsConstructor
 @Controller
+@Profile("admin")
 public class ProductController {
 
     @Autowired
