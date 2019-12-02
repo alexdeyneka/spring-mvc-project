@@ -17,7 +17,7 @@ import java.text.ParseException;
 
 @RequiredArgsConstructor
 @Controller
-@Profile("admin")
+@Profile("dev")
 public class ProductController {
 
     @Autowired
